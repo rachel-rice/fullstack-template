@@ -15,11 +15,21 @@ mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MO
 
 // Middleware (ahead of any data processing)
 
-//enable CORS
+//Enable CORS
 app.use(cors())
 
-//serve static files
+//Serve static files
 app.use(express.static('public'))
 
+//Parse results
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+
+//Set EJS as tempalting engine
+app.set('view engine', 'ejs')
+
+//LOGIC GOES HERE
+
+app.listen(port, () => {
+    console.log(`Server running on: http://localhost:${port}`)
+})
