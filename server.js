@@ -72,7 +72,7 @@ app.delete('/item/update/:id', async (req, res) => {
     }
 })
 
-//LOGIC GOES HERE
+//Start the server
 
 app.listen(port, () => {
     console.log(`Server running on: http://localhost:${port}`)
