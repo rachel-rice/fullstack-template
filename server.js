@@ -38,6 +38,29 @@ app.get('/item', async (req, res) => {
     res.render('item', {items})
 })
 
+//Create
+app.post('/item', async (req, res) => {
+    const newItem = new Item(req.body)
+    try {
+        await newItem.save()
+        res.redirect('/item')
+    } catch (err) {
+        res.redirect('/item?error=true')
+    }
+})
+
+//Update
+app.post('/item/update/:id', async (req, res) => {
+    const {id} = req.params
+    const {name, description} = req.body
+    try {
+      await Item.findByIdAndUpdate(id, {name, description})
+      res.redirect('/item')
+    } catch (err) {
+       
+    }
+})
+
 //LOGIC GOES HERE
 
 app.listen(port, () => {
