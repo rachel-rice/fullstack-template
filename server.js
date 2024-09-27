@@ -57,7 +57,18 @@ app.post('/item/update/:id', async (req, res) => {
       await Item.findByIdAndUpdate(id, {name, description})
       res.redirect('/item')
     } catch (err) {
-       
+        res.redirect('/item?error=true')
+    }
+})
+
+//Delete
+app.delete('/item/update/:id', async (req, res) => {
+    const {id} = req.params
+    try {
+      await Item.findByIdAndDelete(id)
+      res.status(200).json({message: 'Item deleted successfully'})
+    } catch (err) {
+        res.redirect('/item?error=true')
     }
 })
 
