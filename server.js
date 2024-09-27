@@ -28,6 +28,16 @@ app.use(express.json())
 //Set EJS as tempalting engine
 app.set('view engine', 'ejs')
 
+//Routes
+app.get('/', (req, res) => {
+    res.render('index')
+})
+
+app.get('/item', async (req, res) => {
+    const items = await Item.find({})
+    res.render('item', {items})
+})
+
 //LOGIC GOES HERE
 
 app.listen(port, () => {
