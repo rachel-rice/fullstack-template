@@ -12,7 +12,7 @@ const Item = require('./models/Item')
 //Connect To MongoDB Database
 connectDB();
 
-//Set EJS as tempalting engine
+//Set EJS as tempalting engine for views
 app.set('view engine', 'ejs')
 
 //Enable CORS
