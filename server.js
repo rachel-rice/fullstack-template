@@ -1,22 +1,17 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const connectDB = require("./config/database");
 const cors = require('cors');
 const Item = require('./models/Item')
 
 
 //Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" });
+// require("dotenv").config({ path: "./config/.env" });
 
 
-//Connect To Database
+//Connect To MongoDB Database
 connectDB();
-
-// Connect to MongoDB
-
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.fkj2i.mongodb.net/${process.env.MONGODB_DATABASE_NAME}?retryWrites=true&w=majority`)
-    .then(() => console.log('Mongo DB Connected'))
-    .catch(err => console.log(err))
 
 // Middleware (ahead of any data processing)
 
