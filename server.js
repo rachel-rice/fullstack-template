@@ -6,27 +6,26 @@ const cors = require('cors');
 const Item = require('./models/Item')
 
 
-//Use .env file in config folder
+//Use .env file in config folder - calling in database.js file now
 // require("dotenv").config({ path: "./config/.env" });
-
 
 //Connect To MongoDB Database
 connectDB();
 
-// Middleware (ahead of any data processing)
+//Set EJS as tempalting engine
+app.set('view engine', 'ejs')
 
 //Enable CORS
 app.use(cors())
 
-//Serve static files
+//Serve static folder
 app.use(express.static('public'))
 
 //Parse results
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-//Set EJS as tempalting engine
-app.set('view engine', 'ejs')
+// Middleware (ahead of any data processing)
 
 //Routes
 app.get('/', (req, res) => {
