@@ -1,12 +1,15 @@
-require('dotenv').config();
 const express = require('express');
+const app = express()
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Item = require('./models/Item')
 
-const app = express()
 
-const port = process.env.PORT || 4000
+
+// const port = process.env.PORT || 4000
+
+//Use .env file in config folder
+require("dotenv").config({ path: "./config/.env" });
 
 // Connect to MongoDB
 
@@ -73,8 +76,12 @@ app.delete('/item/update/:id', async (req, res) => {
     }
 })
 
-//Start the server
+//Start the server - server running
 
-app.listen(port, () => {
-    console.log(`Server running on: http://localhost:${port}`)
-})
+// app.listen(port, () => {
+//     console.log(`Server running on: http://localhost:${port}`)
+// })
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running, you better catch it`);
+  });
