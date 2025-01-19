@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const logger = require("morgan");
 const connectDB = require("./config/database");
 const cors = require('cors');
 const Item = require('./models/Item')
@@ -21,11 +22,14 @@ app.use(cors())
 //Serve static folder
 app.use(express.static('public'))
 
-//Parse results
+//Body parsing - parse results
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-// Middleware (ahead of any data processing)
+//Logging
+app.use(logger("dev"));
+
+// Middleware above (ahead of any data processing)
 
 //Routes
 app.get('/', (req, res) => {
@@ -71,7 +75,7 @@ app.delete('/item/update/:id', async (req, res) => {
     }
 })
 
-//Start the server - server running
+//Server running
 app.listen(process.env.PORT, () => {
     console.log(`Server is running, you better catch it`);
   });
