@@ -1,15 +1,16 @@
 const express = require('express');
-const app = express()
+const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Item = require('./models/Item')
 
 
-
-// const port = process.env.PORT || 4000
-
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
+
+
+//Connect To Database
+connectDB();
 
 // Connect to MongoDB
 
@@ -77,11 +78,6 @@ app.delete('/item/update/:id', async (req, res) => {
 })
 
 //Start the server - server running
-
-// app.listen(port, () => {
-//     console.log(`Server running on: http://localhost:${port}`)
-// })
-
 app.listen(process.env.PORT, () => {
     console.log(`Server is running, you better catch it`);
   });
