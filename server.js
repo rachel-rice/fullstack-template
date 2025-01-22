@@ -31,10 +31,10 @@ app.use(logger("dev"));
 
 // Middleware above (ahead of any data processing)
 
-//Routes
-app.get('/', (req, res) => {
-    res.render('index')
-})
+//Routes - MOVED TO ROUTES FOLDER
+// app.get('/', (req, res) => {
+//     res.render('index')
+// })
 
 app.get('/item', async (req, res) => {
     const items = await Item.find({})
