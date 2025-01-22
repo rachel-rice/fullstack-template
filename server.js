@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const cors = require('cors');
+const mainRoutes = require("./routes/main");
 const Item = require('./models/Item')
 
 
@@ -20,7 +21,7 @@ app.set('view engine', 'ejs')
 app.use(cors())
 
 //Serve static folder
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 //Body parsing - parse results
 app.use(express.urlencoded({ extended: false }))
@@ -74,6 +75,9 @@ app.delete('/item/update/:id', async (req, res) => {
         res.redirect('/item?error=true')
     }
 })
+
+//Setup Routes For Which The Server Is Listening
+app.use("/", mainRoutes);
 
 //Server running
 app.listen(process.env.PORT, () => {
