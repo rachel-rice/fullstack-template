@@ -32,7 +32,8 @@ app.use(logger("dev"));
 
 // Middleware above (ahead of any data processing)
 
-//Routes - MOVED TO ROUTES FOLDER
+//Routes 
+// MOVED TO ROUTES FOLDER
 // app.get('/', (req, res) => {
 //     res.render('index')
 // })
