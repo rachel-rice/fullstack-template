@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-const logger = require("morgan");
 const connectDB = require("./config/database");
 const cors = require('cors');
+const mongoose = require('mongoose');
+const logger = require("morgan");
 const mainRoutes = require("./routes/main");
-const Item = require('./models/Item')
+const itemRoutes = require("./routes/item");
+// const Item = require('./models/Item') moved to controllers folder
 
 
 //Use .env file in config folder - calling in database.js file now
@@ -27,7 +28,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-//Logging
+//Morgan for logging
 app.use(logger("dev"));
 
 // Middleware above (ahead of any data processing)
@@ -38,47 +39,48 @@ app.use(logger("dev"));
 //     res.render('index')
 // })
 
-app.get('/item', async (req, res) => {
-    const items = await Item.find({})
-    res.render('item', {items})
-})
+// app.get('/item', async (req, res) => {
+//     const items = await Item.find({})
+//     res.render('item', {items})
+// })
 
-//Create
-app.post('/item', async (req, res) => {
-    const newItem = new Item(req.body)
-    try {
-        await newItem.save()
-        res.redirect('/item')
-    } catch (err) {
-        res.redirect('/item?error=true')
-    }
-})
+// //Create
+// app.post('/item', async (req, res) => {
+//     const newItem = new Item(req.body)
+//     try {
+//         await newItem.save()
+//         res.redirect('/item')
+//     } catch (err) {
+//         res.redirect('/item?error=true')
+//     }
+// })
 
-//Update
-app.post('/item/update/:id', async (req, res) => {
-    const {id} = req.params
-    const {name, description} = req.body
-    try {
-      await Item.findByIdAndUpdate(id, {name, description})
-      res.redirect('/item')
-    } catch (err) {
-        res.redirect('/item?error=true')
-    }
-})
+// //Update
+// app.post('/item/update/:id', async (req, res) => {
+//     const {id} = req.params
+//     const {name, description} = req.body
+//     try {
+//       await Item.findByIdAndUpdate(id, {name, description})
+//       res.redirect('/item')
+//     } catch (err) {
+//         res.redirect('/item?error=true')
+//     }
+// })
 
-//Delete
-app.delete('/item/update/:id', async (req, res) => {
-    const {id} = req.params
-    try {
-      await Item.findByIdAndDelete(id)
-      res.status(200).json({message: 'Item deleted successfully'})
-    } catch (err) {
-        res.redirect('/item?error=true')
-    }
-})
+// //Delete
+// app.delete('/item/update/:id', async (req, res) => {
+//     const {id} = req.params
+//     try {
+//       await Item.findByIdAndDelete(id)
+//       res.status(200).json({message: 'Item deleted successfully'})
+//     } catch (err) {
+//         res.redirect('/item?error=true')
+//     }
+// })
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
+app.use("/item", itemRoutes);
 
 //Server running
 app.listen(process.env.PORT, () => {
