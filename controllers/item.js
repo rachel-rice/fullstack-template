@@ -12,7 +12,7 @@ module.exports = {
 };
 
 
-// NEED TO MAKE SURE THE FOLLOWIN ROUTES ARE INCLUDED
+// NEED TO MAKE SURE THE FOLLOWING ROUTES ARE INCLUDED
 
 // app.get('/item', async (req, res) => {
 //     const items = await Item.find({})
