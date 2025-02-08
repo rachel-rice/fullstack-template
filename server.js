@@ -21,6 +21,9 @@ app.set('view engine', 'ejs')
 //Enable CORS
 app.use(cors())
 
+//Use Morgan for logging
+app.use(logger("dev"));
+
 //Serve static folder
 app.use(express.static('public'));
 
@@ -28,8 +31,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-//Morgan for logging
-app.use(logger("dev"));
+
 
 // Middleware above (ahead of any data processing)
 
