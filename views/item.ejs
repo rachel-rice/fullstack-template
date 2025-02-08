@@ -14,7 +14,7 @@
 
     <!--Create-->
 
-    <form id="createForm" action="/item" method="POST"> 
+    <form id="createForm" action="/item/add" method="POST"> 
         <input type="text" name="name" placeholder="Item name" required>
         <input type="text" name="description" placeholder="Item description" required>
         <button type="submit">Create Item</button>
@@ -22,7 +22,7 @@
 
    <!--Update-->
 
-    <form id="updateForm" action="/item/update/" method="POST">
+    <form id="updateForm" action="/item/update/:id" method="POST">
         <input type="hidden" name="_id" id="updateId"> <!--Bundle ID with the form data-->
         <input type="text" name="name" id="updateName" placeholder="New item name" required>
         <input type="text" name="description" id="updateDescription" placeholder="New item description" required>
